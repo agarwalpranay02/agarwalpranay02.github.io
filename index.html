@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pranay Agarwal — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f2ec;
+  --bg2: #edeae2;
+  --ink: #1c1a14;
+  --ink2: #3a3728;
+  --muted: #7a7567;
+  --accent: #b85c2c;
+  --accent2: #2c6e49;
+  --accent3: #1a4a7a;
+  --border: #d8d3c8;
+  --white: #fefcf8;
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--ink); line-height: 1.7; overflow-x: hidden; }
+body::after { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E"); pointer-events: none; z-index: 9999; }
+#progress { position: fixed; top: 0; left: 0; height: 2px; width: 0%; background: linear-gradient(90deg, var(--accent), var(--accent2)); z-index: 10000; transition: width 0.1s; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 18px 6%; background: rgba(245,242,236,0.92); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+.nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; color: var(--ink); text-decoration: none; }
+.nav-logo span { color: var(--accent); }
+.nav-links { display: flex; gap: 24px; list-style: none; }
+.nav-links a { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: var(--accent); }
+
+/* HERO */
+#hero { min-height: 100vh; display: grid; grid-template-columns: 1.2fr 0.8fr; align-items: center; padding: 120px 6% 80px; max-width: 1300px; margin: 0 auto; gap: 80px; }
+.hero-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+.hero-eyebrow::before { content: ''; display: block; width: 32px; height: 1px; background: var(--accent); }
+.hero-text h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3.5rem, 6vw, 6rem); line-height: 1.0; letter-spacing: -0.02em; font-weight: 300; margin-bottom: 8px; }
+.hero-text h1 strong { font-weight: 700; display: block; }
+.hero-text h1 em { font-style: italic; color: var(--accent); }
+.hero-tagline { font-size: 1rem; color: var(--muted); margin: 24px 0 36px; max-width: 480px; line-height: 1.8; font-weight: 400; }
+.hero-badges { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 36px; }
+.badge { display: inline-flex; align-items: center; gap: 7px; padding: 7px 16px; border-radius: 30px; border: 1px solid var(--border); font-size: 12px; font-weight: 600; color: var(--ink2); text-decoration: none; background: var(--white); transition: all 0.2s; white-space: nowrap; }
+.badge:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(184,92,44,0.15); }
+.badge svg { width: 14px; height: 14px; flex-shrink: 0; }
+.hero-cta { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; background: var(--ink); color: var(--white); font-size: 13px; font-weight: 600; letter-spacing: 0.05em; text-decoration: none; border-radius: 2px; transition: all 0.2s; }
+.hero-cta:hover { background: var(--accent); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(184,92,44,0.3); }
+.hero-card { background: var(--white); border: 1px solid var(--border); border-radius: 3px; padding: 40px; position: relative; box-shadow: 6px 6px 0 var(--border); }
+.hero-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3)); }
+.avatar { width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent2)); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--white); font-weight: 600; margin-bottom: 20px; }
+.hero-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; margin-bottom: 4px; }
+.hero-card .mono { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent); letter-spacing: 0.05em; margin-bottom: 24px; }
+.info-table { width: 100%; font-size: 13px; }
+.info-table tr td { padding: 7px 0; border-bottom: 1px solid var(--border); vertical-align: top; }
+.info-table tr:last-child td { border-bottom: none; }
+.info-table td:first-child { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); width: 35%; padding-top: 9px; }
+.info-table td:last-child { font-weight: 500; color: var(--ink2); }
+.divider { height: 1px; background: var(--border); margin: 24px 0; }
+.stats-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; text-align: center; }
+.stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 700; color: var(--accent); line-height: 1; margin-bottom: 4px; }
+.stat-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+
+/* SECTIONS */
+.section-wrap { max-width: 1300px; margin: 0 auto; padding: 90px 6%; }
+.section-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+.section-eyebrow::before { content: '//'; opacity: 0.4; font-size: 10px; }
+.section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 600; letter-spacing: -0.02em; margin-bottom: 50px; line-height: 1.1; }
+.section-alt { background: var(--bg2); }
+
+/* EDUCATION */
+.edu-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+.edu-card { background: var(--white); border: 1px solid var(--border); border-radius: 3px; padding: 28px; position: relative; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; }
+.edu-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+.edu-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; }
+.edu-card.primary::after { background: var(--accent); }
+.edu-card.secondary::after { background: var(--accent2); }
+.edu-card.tertiary::after { background: var(--accent3); }
+.edu-year { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 12px; }
+.edu-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; line-height: 1.4; }
+.edu-card .inst { font-size: 0.85rem; color: var(--muted); margin-bottom: 14px; line-height: 1.5; }
+.edu-score { display: inline-flex; align-items: center; gap: 6px; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; padding: 4px 12px; border-radius: 20px; background: var(--bg); border: 1px solid var(--border); color: var(--ink2); }
+
+/* WORK */
+.work-timeline { position: relative; padding-left: 36px; max-width: 760px; }
+.work-timeline::before { content: ''; position: absolute; left: 0; top: 8px; bottom: 0; width: 1px; background: linear-gradient(to bottom, var(--accent), transparent); }
+.work-item { position: relative; margin-bottom: 48px; }
+.work-item::before { content: ''; position: absolute; left: -40px; top: 6px; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px var(--bg2), 0 0 0 5px rgba(184,92,44,0.3); }
+.work-date { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 8px; }
+.work-item h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 4px; }
+.work-item .org { font-size: 0.9rem; color: var(--muted); margin-bottom: 10px; }
+.work-item p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; font-weight: 400; }
+.work-badge { display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 10px; border-radius: 20px; margin-bottom: 10px; }
+.work-badge.current { background: rgba(44,110,73,0.1); color: var(--accent2); border: 1px solid rgba(44,110,73,0.2); }
+.work-badge.past { background: rgba(184,92,44,0.1); color: var(--accent); border: 1px solid rgba(184,92,44,0.2); }
+
+/* SKILLS */
+.skills-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+.skill-group { margin-bottom: 32px; }
+.skill-group-title { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.15em; color: var(--muted); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+.skill-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.skill-pill { padding: 6px 14px; border-radius: 2px; font-size: 12px; font-weight: 500; background: var(--white); border: 1px solid var(--border); color: var(--ink2); transition: all 0.2s; font-family: 'JetBrains Mono', monospace; }
+.skill-pill:hover { border-color: var(--accent); color: var(--accent); }
+.skill-pill.hl { background: rgba(184,92,44,0.08); border-color: rgba(184,92,44,0.3); color: var(--accent); }
+.course-tag { padding: 5px 12px; border-radius: 2px; font-size: 11.5px; background: var(--bg); border: 1px solid var(--border); color: var(--muted); display: inline-block; margin: 4px 4px 0 0; }
+
+/* PROJECTS */
+.projects-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+.project-card { background: var(--white); border: 1px solid var(--border); border-radius: 3px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s; }
+.project-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.1); }
+.project-stripe { height: 3px; }
+.py { background: linear-gradient(90deg,#3776AB,#FFD43B); }
+.nb { background: linear-gradient(90deg,#F37626,#F7931E); }
+.cpp { background: linear-gradient(90deg,#00599C,#659ad2); }
+.web { background: linear-gradient(90deg,#e34f26,#f7df1e); }
+.project-body { padding: 24px; display: flex; flex-direction: column; flex: 1; }
+.project-num { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); margin-bottom: 12px; }
+.project-body h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 8px; line-height: 1.4; }
+.project-body p { font-size: 0.83rem; color: var(--muted); margin-bottom: 16px; line-height: 1.7; flex: 1; font-weight: 400; }
+.project-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 16px; }
+.ptag { font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 2px; background: var(--bg); border: 1px solid var(--border); color: var(--muted); }
+.ptag.a { background: rgba(184,92,44,0.08); color: var(--accent); border-color: rgba(184,92,44,0.2); }
+.ptag.g { background: rgba(44,110,73,0.08); color: var(--accent2); border-color: rgba(44,110,73,0.2); }
+.project-link { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: var(--accent); text-decoration: none; transition: gap 0.2s; margin-top: auto; }
+.project-link:hover { gap: 10px; }
+
+/* PATENT */
+.patent-card { background: var(--white); border: 1px solid var(--border); border-radius: 3px; padding: 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; position: relative; box-shadow: 6px 6px 0 var(--border); }
+.patent-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--accent), var(--accent3)); }
+.patent-icon { font-size: 3rem; margin-bottom: 16px; display: block; }
+.patent-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; line-height: 1.3; margin-bottom: 16px; }
+.patent-meta { font-size: 0.85rem; color: var(--muted); line-height: 1.8; }
+.patent-meta strong { color: var(--ink2); }
+.patent-details { border-left: 2px solid var(--border); padding-left: 40px; }
+.patent-row { display: flex; gap: 12px; margin-bottom: 14px; font-size: 0.88rem; }
+.patent-row .key { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); min-width: 90px; padding-top: 2px; }
+.patent-row .val { color: var(--ink2); font-weight: 500; line-height: 1.5; }
+.patent-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 20px; padding: 10px 24px; background: var(--ink); color: var(--white); font-size: 12px; font-weight: 600; letter-spacing: 0.05em; text-decoration: none; border-radius: 2px; transition: all 0.2s; }
+.patent-link:hover { background: var(--accent); }
+
+/* PUBLICATIONS */
+.pub-item { display: grid; grid-template-columns: 56px 1fr; gap: 24px; padding: 28px 0; border-bottom: 1px solid var(--border); align-items: start; }
+.pub-num { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--border); font-weight: 700; line-height: 1; }
+.pub-item h3 { font-size: 0.97rem; font-weight: 700; margin-bottom: 6px; line-height: 1.5; }
+.pub-meta { font-size: 0.82rem; color: var(--muted); margin-bottom: 10px; line-height: 1.6; }
+.pub-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+.pub-tag { font-size: 10px; font-weight: 600; letter-spacing: 0.06em; padding: 2px 10px; border-radius: 20px; }
+.pt-r { background: rgba(26,74,122,0.1); color: var(--accent3); border: 1px solid rgba(26,74,122,0.2); }
+.pt-p { background: rgba(44,110,73,0.1); color: var(--accent2); border: 1px solid rgba(44,110,73,0.2); }
+.pt-f { background: rgba(184,92,44,0.1); color: var(--accent); border: 1px solid rgba(184,92,44,0.2); }
+.pt-s { background: rgba(122,117,103,0.1); color: var(--muted); border: 1px solid rgba(122,117,103,0.2); }
+.pub-link { font-size: 11px; font-weight: 600; color: var(--muted); text-decoration: none; font-family: 'JetBrains Mono', monospace; }
+.coming-soon { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.1em; border: 1px dashed var(--border); padding: 2px 10px; border-radius: 20px; display: inline-block; }
+
+/* DATASETS */
+.datasets-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.dataset-card { background: var(--white); border: 1px solid var(--border); border-radius: 3px; padding: 32px; position: relative; transition: transform 0.2s, box-shadow 0.2s; }
+.dataset-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.08); }
+.dataset-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--accent); border-radius: 3px 0 0 3px; }
+.dataset-platform { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--accent); margin-bottom: 12px; }
+.featured-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; padding: 5px 12px; border-radius: 2px; background: rgba(184,92,44,0.08); color: var(--accent); border: 1px solid rgba(184,92,44,0.2); margin-bottom: 14px; }
+.dataset-card h3 { font-size: 0.97rem; font-weight: 700; margin-bottom: 10px; line-height: 1.5; }
+.dataset-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.7; margin-bottom: 16px; font-weight: 400; }
+.dstats { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+.dstat { font-family: 'JetBrains Mono', monospace; font-size: 10px; padding: 3px 10px; background: var(--bg); border: 1px solid var(--border); color: var(--muted); border-radius: 2px; }
+.dataset-link { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: var(--accent); text-decoration: none; }
+
+/* MENTORS */
+.mentors-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.mentor-card { background: var(--white); border: 1px solid var(--border); border-radius: 3px; padding: 32px; transition: transform 0.2s, box-shadow 0.2s; }
+.mentor-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.08); }
+.mentor-role-tag { display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 10px; border-radius: 20px; margin-bottom: 14px; }
+.mrt-a { background: rgba(26,74,122,0.1); color: var(--accent3); border: 1px solid rgba(26,74,122,0.2); }
+.mrt-i { background: rgba(44,110,73,0.1); color: var(--accent2); border: 1px solid rgba(44,110,73,0.2); }
+.mentor-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; }
+.mentor-card .org { font-size: 0.85rem; color: var(--muted); margin-bottom: 14px; line-height: 1.6; }
+.mentor-card .desc { font-size: 0.84rem; color: var(--muted); margin-bottom: 18px; line-height: 1.7; font-weight: 400; }
+.mentor-links { display: flex; flex-wrap: wrap; gap: 8px; }
+.mentor-link { font-size: 11px; font-weight: 600; padding: 5px 14px; border-radius: 2px; border: 1px solid var(--border); text-decoration: none; color: var(--ink2); transition: all 0.2s; background: var(--bg); }
+.mentor-link:hover { background: var(--ink); color: var(--white); border-color: var(--ink); }
+
+/* CERTIFICATIONS */
+.certs-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+.cert-card { background: var(--white); border: 1px solid var(--border); border-radius: 3px; padding: 28px; transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; }
+.cert-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.08); }
+.cert-issuer { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 12px; }
+.ci-oracle { color: #C74634; } .ci-mckinsey { color: #00A3E0; } .ci-google { color: #4285F4; }
+.cert-icon { font-size: 1.8rem; margin-bottom: 14px; display: block; }
+.cert-card h3 { font-size: 0.92rem; font-weight: 700; margin-bottom: 14px; line-height: 1.4; flex: 1; }
+.cert-links { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; }
+.cert-link { font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 2px; border: 1px solid var(--border); text-decoration: none; color: var(--ink2); transition: all 0.2s; background: var(--bg); }
+.cert-link:hover { background: var(--ink); color: var(--white); border-color: var(--ink); }
+
+/* RECOGNITION */
+.rec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.rec-card { background: var(--white); border: 1px solid var(--border); border-radius: 3px; padding: 28px; display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s; }
+.rec-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.08); }
+.rec-icon { font-size: 2rem; margin-bottom: 14px; display: block; }
+.rec-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+.rec-card p { font-size: 0.84rem; color: var(--muted); line-height: 1.7; margin-bottom: 16px; flex: 1; font-weight: 400; }
+.rec-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; }
+.rec-link { font-size: 11px; font-weight: 600; padding: 5px 14px; border-radius: 2px; border: 1px solid var(--border); text-decoration: none; color: var(--ink2); transition: all 0.2s; background: var(--bg); }
+.rec-link:hover { background: var(--accent); color: var(--white); border-color: var(--accent); }
+
+/* VOLUNTEER */
+.vol-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.vol-card { background: var(--white); border: 1px solid var(--border); border-radius: 3px; padding: 32px; position: relative; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; }
+.vol-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.08); }
+.vol-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--accent2), transparent); }
+.vol-period { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--accent2); letter-spacing: 0.1em; margin-bottom: 10px; }
+.vol-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
+.vol-card .org { font-size: 0.85rem; color: var(--muted); margin-bottom: 12px; }
+.vol-card p { font-size: 0.84rem; color: var(--muted); line-height: 1.7; margin-bottom: 16px; font-weight: 400; }
+.vol-skills { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+.vol-skill { font-size: 10px; padding: 2px 10px; background: rgba(44,110,73,0.08); color: var(--accent2); border: 1px solid rgba(44,110,73,0.2); border-radius: 20px; }
+.vol-link { font-size: 11px; font-weight: 600; padding: 5px 14px; border-radius: 2px; border: 1px solid var(--border); text-decoration: none; color: var(--ink2); transition: all 0.2s; display: inline-block; }
+.vol-link:hover { background: var(--accent2); color: var(--white); border-color: var(--accent2); }
+
+/* EXTRA */
+.extra-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+.extra-card { background: var(--white); border: 1px solid var(--border); border-radius: 3px; padding: 28px; text-align: center; transition: transform 0.2s, box-shadow 0.2s; }
+.extra-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.08); }
+.extra-icon { font-size: 2.2rem; margin-bottom: 14px; display: block; }
+.extra-card h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 8px; }
+.extra-card p { font-size: 0.83rem; color: var(--muted); line-height: 1.7; font-weight: 400; margin-bottom: 14px; }
+.extra-badge { display: inline-block; font-size: 10px; font-weight: 600; padding: 3px 12px; border-radius: 20px; background: rgba(184,92,44,0.08); color: var(--accent); border: 1px solid rgba(184,92,44,0.2); }
+.extra-link { display: inline-block; margin-top: 12px; font-size: 11px; font-weight: 600; padding: 4px 14px; border-radius: 2px; border: 1px solid var(--border); text-decoration: none; color: var(--ink2); transition: all 0.2s; }
+.extra-link:hover { background: var(--ink); color: var(--white); }
+
+/* CONTACT */
+#contact { background: var(--ink); color: var(--bg); }
+#contact .section-eyebrow { color: var(--accent); }
+#contact .section-title { color: var(--bg); }
+.contact-layout { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 80px; align-items: start; }
+.contact-desc { font-size: 1rem; color: rgba(245,242,236,0.65); line-height: 1.8; max-width: 440px; font-weight: 300; margin-bottom: 0; }
+.contact-links { display: flex; flex-direction: column; gap: 12px; }
+.contact-link { display: flex; align-items: center; gap: 16px; padding: 16px 20px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 3px; text-decoration: none; color: var(--bg); transition: all 0.2s; }
+.contact-link:hover { background: rgba(255,255,255,0.1); transform: translateX(4px); border-color: rgba(184,92,44,0.5); }
+.contact-link svg { width: 18px; height: 18px; flex-shrink: 0; color: var(--accent); }
+.c-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(245,242,236,0.45); display: block; margin-bottom: 2px; }
+.c-val { font-size: 0.9rem; font-weight: 500; word-break: break-all; }
+
+footer { text-align: center; padding: 32px 6%; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); border-top: 1px solid var(--border); letter-spacing: 0.05em; }
+
+.fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.fade-up.visible { opacity: 1; transform: none; }
+
+@media(max-width:1024px) {
+  #hero { grid-template-columns: 1fr; gap: 40px; }
+  .hero-card { display: none; }
+  .edu-grid { grid-template-columns: 1fr; }
+  .projects-grid { grid-template-columns: repeat(2,1fr); }
+  .patent-card { grid-template-columns: 1fr; }
+  .patent-details { border-left: none; border-top: 2px solid var(--border); padding-left: 0; padding-top: 30px; }
+  .skills-layout { grid-template-columns: 1fr; }
+  .certs-grid { grid-template-columns: repeat(2,1fr); }
+  .contact-layout { grid-template-columns: 1fr; gap: 40px; }
+}
+@media(max-width:768px) {
+  .nav-links { display: none; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .datasets-grid { grid-template-columns: 1fr; }
+  .mentors-grid { grid-template-columns: 1fr; }
+  .rec-grid { grid-template-columns: 1fr; }
+  .vol-grid { grid-template-columns: 1fr; }
+  .extra-grid { grid-template-columns: 1fr; }
+  .certs-grid { grid-template-columns: 1fr; }
+  .section-wrap { padding: 60px 5%; }
+  #hero { padding: 100px 5% 60px; }
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<nav>
+  <a class="nav-logo" href="#hero">Pranay<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#publications">Research</a></li>
+    <li><a href="#certifications">Certs</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <div class="hero-text fade-up">
+    <div class="hero-eyebrow">Final Year · BIT Mesra · Open to Opportunities</div>
+    <h1><strong>Pranay</strong><em>Agarwal</em></h1>
+    <p class="hero-tagline">AI/ML Researcher & Computer Vision Engineer. Building intelligent systems that bridge the gap between research and real-world deployment — from deep learning models to edge devices.</p>
+    <div class="hero-badges">
+      <a class="badge" href="https://www.linkedin.com/in/pranay-agarwal-83b177295/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn
+      </a>
+      <a class="badge" href="https://github.com/agarwalpranay02" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>GitHub
+      </a>
+      <a class="badge" href="https://scholar.google.com/citations?hl=en&user=L2xx3fgAAAAJ" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg>Google Scholar
+      </a>
+      <a class="badge" href="https://orcid.org/0009-0009-6879-4074" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zm-1.374 4.622c.446 0 .808.363.808.809s-.362.809-.808.809-.809-.363-.809-.809.363-.809.809-.809zm-.985 2.765h1.97v10.45h-1.97V7.387zm4.01 0h3.303c3.143 0 4.674 2.126 4.674 5.226 0 3.087-1.53 5.224-4.674 5.224h-3.303V7.387zm1.97 1.739v6.971h1.167c1.848 0 2.832-1.152 2.832-3.486 0-2.33-.984-3.485-2.832-3.485H15.62z"/></svg>ORCID
+      </a>
+    </div>
+    <a class="hero-cta" href="mailto:pranayagarwal2511@gmail.com">Get in Touch →</a>
+  </div>
+  <div class="hero-card fade-up">
+    <div class="avatar">PA</div>
+    <h3>Pranay Agarwal</h3>
+    <div class="mono">// agarwalpranay02</div>
+    <table class="info-table">
+      <tr><td>Degree</td><td>B.Tech Computer Science & Engineering</td></tr>
+      <tr><td>Institute</td><td>Birla Institute of Technology, Mesra, Ranchi</td></tr>
+      <tr><td>Semester</td><td>8th Semester (Final Year)</td></tr>
+      <tr><td>CGPA</td><td>8.33 / 10</td></tr>
+      <tr><td>Location</td><td>Jaipur, Rajasthan, India</td></tr>
+      <tr><td>Email</td><td>pranayagarwal2511@gmail.com</td></tr>
+    </table>
+    <div class="divider"></div>
+    <div class="stats-row">
+      <div><div class="stat-num">5+</div><div class="stat-label">Publications</div></div>
+      <div><div class="stat-num">2</div><div class="stat-label">Datasets</div></div>
+      <div><div class="stat-num">1</div><div class="stat-label">Patent</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about" class="section-alt">
+  <div class="section-wrap">
+    <div class="section-eyebrow fade-up">Introduction</div>
+    <div class="section-title fade-up">About Me</div>
+    <div style="display:grid;grid-template-columns:1.1fr 0.9fr;gap:60px;align-items:start;" class="fade-up">
+      <div>
+        <p style="font-size:1.05rem;line-height:1.9;color:var(--ink2);margin-bottom:20px;font-weight:400;">I am Pranay Agarwal, a final-year B.Tech Computer Science & Engineering student at Birla Institute of Technology (BIT), Mesra, Ranchi, with a CGPA of 8.33. I specialize in deep learning, computer vision, and edge AI — with a strong track record of translating research into real-world impact.</p>
+        <p style="font-size:1.05rem;line-height:1.9;color:var(--ink2);margin-bottom:20px;font-weight:400;">As an undergraduate, I have published datasets on IEEE DataPort and Mendeley Data, hold a granted design patent from the Government of India, presented at international conferences, and had my work recognized by Springer Nature and featured in regional media.</p>
+        <p style="font-size:1.05rem;line-height:1.9;color:var(--ink2);font-weight:400;">I am passionate about building intelligent systems that bridge the gap between research and real-world deployment — from training deep learning models to deploying them on edge devices and extracting actionable insights from complex data.</p>
+      </div>
+      <div>
+        <div class="skill-group">
+          <div class="skill-group-title">Research Interests</div>
+          <div class="skill-pills">
+            <span class="skill-pill hl">Deep Learning</span>
+            <span class="skill-pill hl">Computer Vision</span>
+            <span class="skill-pill hl">Edge AI / TinyML</span>
+            <span class="skill-pill">Agricultural AI</span>
+            <span class="skill-pill">Generative AI</span>
+            <span class="skill-pill">Sports Analytics</span>
+            <span class="skill-pill">Hybrid ML Architectures</span>
+          </div>
+        </div>
+        <div class="skill-group" style="margin-top:24px;">
+          <div class="skill-group-title">Roles I'm Interested In</div>
+          <div class="skill-pills">
+            <span class="skill-pill">AI/ML Research Engineer</span>
+            <span class="skill-pill">Computer Vision Engineer</span>
+            <span class="skill-pill">Data Scientist</span>
+            <span class="skill-pill">Edge AI / Embedded ML</span>
+            <span class="skill-pill">Research Assistant</span>
+            <span class="skill-pill">AI Product Developer</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-wrap">
+    <div class="section-eyebrow fade-up">Academic Background</div>
+    <div class="section-title fade-up">Education</div>
+    <div class="edu-grid">
+      <div class="edu-card primary fade-up">
+        <div class="edu-year">2021 — 2025</div>
+        <h3>B.Tech — Computer Science & Engineering</h3>
+        <div class="inst">Birla Institute of Technology (BIT), Mesra<br>Ranchi, Jharkhand, India</div>
+        <div class="edu-score">📊 CGPA: 8.33 / 10</div>
+        <p style="font-size:0.82rem;color:var(--muted);margin-top:12px;line-height:1.6;">8th Semester · Final Year · AI/ML & Computer Vision</p>
+      </div>
+      <div class="edu-card secondary fade-up">
+        <div class="edu-year">Completed 2021</div>
+        <h3>12th Grade — CBSE Board</h3>
+        <div class="inst">Blue Heaven Vidyalaya, Jaipur<br>Rajasthan, India</div>
+        <div class="edu-score">📊 Percentage: 92.4%</div>
+        <p style="font-size:0.82rem;color:var(--muted);margin-top:12px;line-height:1.6;">Physics · Chemistry · Mathematics</p>
+      </div>
+      <div class="edu-card tertiary fade-up">
+        <div class="edu-year">Completed 2019</div>
+        <h3>10th Grade — CBSE Board</h3>
+        <div class="inst">Ryan International School, Jaipur<br>Rajasthan, India</div>
+        <div class="edu-score">📊 Percentage: 91.4%</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="section-alt">
+  <div class="section-wrap">
+    <div class="section-eyebrow fade-up">Professional</div>
+    <div class="section-title fade-up">Work Experience</div>
+    <div class="work-timeline">
+      <div class="work-item fade-up">
+        <div class="work-date">JULY 2025 — PRESENT</div>
+        <span class="work-badge current">● Currently Working</span>
+        <h3>AI/ML Research Intern</h3>
+        <div class="org">MaxBrain Technologies · Jaipur, India</div>
+        <p>Working on applied AI/ML research including computer vision systems, deep learning model development, and agricultural AI applications. Collaborating on research publications, patent development, and real-world deployment of intelligent systems.</p>
+      </div>
+      <div class="work-item fade-up">
+        <div class="work-date">MAY 2025 — JULY 2025</div>
+        <span class="work-badge past">Completed</span>
+        <h3>Software Engineering Intern</h3>
+        <div class="org">Starlight Data Solutions Pvt. Ltd. · Noida, India</div>
+        <p>Contributed to software engineering projects involving data pipelines, backend development, and system design. Gained hands-on experience in professional software development workflows and collaborative engineering practices.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-wrap">
+    <div class="section-eyebrow fade-up">Toolkit</div>
+    <div class="section-title fade-up">Skills & Technologies</div>
+    <div class="skills-layout">
+      <div>
+        <div class="skill-group fade-up">
+          <div class="skill-group-title">Languages</div>
+          <div class="skill-pills"><span class="skill-pill hl">Python</span><span class="skill-pill hl">C</span><span class="skill-pill">C++</span><span class="skill-pill">Java</span></div>
+        </div>
+        <div class="skill-group fade-up">
+          <div class="skill-group-title">AI & Machine Learning</div>
+          <div class="skill-pills"><span class="skill-pill hl">TensorFlow</span><span class="skill-pill hl">PyTorch</span><span class="skill-pill hl">OpenCV</span><span class="skill-pill hl">Scikit-learn</span><span class="skill-pill">XGBoost</span><span class="skill-pill">NumPy</span><span class="skill-pill">Pandas</span></div>
+        </div>
+        <div class="skill-group fade-up">
+          <div class="skill-group-title">Generative AI</div>
+          <div class="skill-pills"><span class="skill-pill">OpenAI API (GPT-3.5/4)</span><span class="skill-pill">LangChain</span><span class="skill-pill">Hugging Face</span><span class="skill-pill">Prompt Engineering</span><span class="skill-pill">RAG</span></div>
+        </div>
+        <div class="skill-group fade-up">
+          <div class="skill-group-title">Web Skills</div>
+          <div class="skill-pills"><span class="skill-pill">HTML</span><span class="skill-pill">CSS</span><span class="skill-pill">JavaScript</span><span class="skill-pill">PHP</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="skill-group fade-up">
+          <div class="skill-group-title">Tools & Platforms</div>
+          <div class="skill-pills"><span class="skill-pill hl">Git</span><span class="skill-pill hl">GitHub</span><span class="skill-pill">Jupyter Notebook</span><span class="skill-pill">Google Colab</span><span class="skill-pill">VS Code</span><span class="skill-pill">LaTeX</span><span class="skill-pill">Figma</span><span class="skill-pill">Canva</span><span class="skill-pill">Linux</span><span class="skill-pill">Windows</span></div>
+        </div>
+        <div class="skill-group fade-up">
+          <div class="skill-group-title">Research Tools</div>
+          <div class="skill-pills"><span class="skill-pill">GitHub Actions</span><span class="skill-pill">TF Model Optimisation Toolkit</span><span class="skill-pill">Lens.Org</span><span class="skill-pill">VOSviewer</span></div>
+        </div>
+        <div class="skill-group fade-up">
+          <div class="skill-group-title">Soft Skills</div>
+          <div class="skill-pills"><span class="skill-pill">Leadership</span><span class="skill-pill">Public Speaking</span><span class="skill-pill">Team Collaboration</span><span class="skill-pill">Adaptability</span><span class="skill-pill">Time Management</span><span class="skill-pill">Quick Learner</span></div>
+        </div>
+        <div class="skill-group fade-up">
+          <div class="skill-group-title">Relevant Courses</div>
+          <span class="course-tag">Computational Thinking</span><span class="course-tag">DSA</span><span class="course-tag">OOP</span><span class="course-tag">Operating Systems</span><span class="course-tag">DBMS</span><span class="course-tag">COA</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="section-alt">
+  <div class="section-wrap">
+    <div class="section-eyebrow fade-up">Work</div>
+    <div class="section-title fade-up">Projects</div>
+    <div class="projects-grid">
+      <div class="project-card fade-up"><div class="project-stripe py"></div><div class="project-body"><div class="project-num">01 · Python · CNN · XGBoost</div><h3>Hybrid Deep Learning for Plant Disease Diagnosis</h3><p>Hybrid CNN + XGBoost system for automated plant disease diagnosis on Indian ridge gourd. Custom dataset collected from real farms. ~92% accuracy — presented at MIND-2025, MNIT Jaipur.</p><div class="project-tags"><span class="ptag a">92% Accuracy</span><span class="ptag g">Conference Paper</span><span class="ptag">DenseNet121</span><span class="ptag">XGBoost</span></div><a class="project-link" href="https://github.com/agarwalpranay02/Hybrid-Deep-Learning-for-Plant-Disease-Diagnosis" target="_blank" rel="noopener">View on GitHub →</a></div></div>
+
+      <div class="project-card fade-up"><div class="project-stripe py"></div><div class="project-body"><div class="project-num">02 · Python · YOLO · CV</div><h3>Soccerlytics — Advanced Football Video Analysis</h3><p>Real-time football match analysis with YOLO-based multi-object tracking, ball possession intelligence, team assignment, and 2D tactical reconstruction from raw video footage.</p><div class="project-tags"><span class="ptag a">SCIE Journal Submitted</span><span class="ptag">YOLO</span><span class="ptag">Real-time</span></div><a class="project-link" href="https://github.com/agarwalpranay02/Soccerlytics-Advanced-Football-Video-Analysis-System" target="_blank" rel="noopener">View on GitHub →</a></div></div>
+
+      <div class="project-card fade-up"><div class="project-stripe nb"></div><div class="project-body"><div class="project-num">03 · Python · TinyML · Edge AI</div><h3>TinyML Human Activity Recognition on Edge Devices</h3><p>Lightweight deep learning model for HAR deployed on resource-constrained edge devices. Presented at WCAIAA 2026, National Forensic Sciences University, Goa.</p><div class="project-tags"><span class="ptag g">Presented WCAIAA 2026</span><span class="ptag">Arduino</span><span class="ptag">TinyML</span></div><a class="project-link" href="https://github.com/agarwalpranay02/TinyML-Human-Activity-Recognition-on-Edge-Devices" target="_blank" rel="noopener">View on GitHub →</a></div></div>
+
+      <div class="project-card fade-up"><div class="project-stripe py"></div><div class="project-body"><div class="project-num">04 · Python · Transfer Learning</div><h3>Deep Learning Fruit Freshness Classifier</h3><p>CNN and transfer learning (VGG16, MobileNetV2) to classify fruits as fresh or rotten across 6 classes. End-to-end pipeline from data preprocessing to model evaluation.</p><div class="project-tags"><span class="ptag">VGG16</span><span class="ptag">MobileNetV2</span><span class="ptag">6 Classes</span></div><a class="project-link" href="https://github.com/agarwalpranay02/Deep_Learning_Based_Fruit_Classification" target="_blank" rel="noopener">View on GitHub →</a></div></div>
+
+      <div class="project-card fade-up"><div class="project-stripe py"></div><div class="project-body"><div class="project-num">05 · Python · Arduino · IoT</div><h3>Driver Safety System — ML + Arduino</h3><p>Arduino-based embedded safety system detecting driver drowsiness and alcohol presence in real time. Provides immediate hardware alerts to prevent road accidents.</p><div class="project-tags"><span class="ptag">Arduino</span><span class="ptag g">Safety Critical</span><span class="ptag">Embedded AI</span></div><a class="project-link" href="https://github.com/agarwalpranay02/Driver-Safety-System-using-ML-and-Arduino" target="_blank" rel="noopener">View on GitHub →</a></div></div>
+
+      <div class="project-card fade-up"><div class="project-stripe nb"></div><div class="project-body"><div class="project-num">06 · Jupyter · Transfer Learning</div><h3>Dog Breed Prediction — Multi-class Classification</h3><p>TensorFlow transfer learning model classifying top 10 dog breeds from images. Achieves 94%+ validation accuracy on the Kaggle dataset with fine-tuned feature extraction.</p><div class="project-tags"><span class="ptag a">94%+ Accuracy</span><span class="ptag">TensorFlow</span><span class="ptag">Kaggle</span></div><a class="project-link" href="https://github.com/agarwalpranay02/Dog-Breed-Prediction-based-on-Multi-class-Classification" target="_blank" rel="noopener">View on GitHub →</a></div></div>
+
+      <div class="project-card fade-up"><div class="project-stripe web"></div><div class="project-body"><div class="project-num">07 · HTML · CSS · JS · PHP</div><h3>Tourism Website with Chatbot Assistant</h3><p>Responsive tourism website with an interactive chatbot, travel packages showcase, and contact form backed by PHP + MySQL for data storage and async submission.</p><div class="project-tags"><span class="ptag">Chatbot</span><span class="ptag">PHP</span><span class="ptag">MySQL</span><span class="ptag">Responsive</span></div><a class="project-link" href="https://github.com/agarwalpranay02/Tourism-Website-with-Chatbot" target="_blank" rel="noopener">View on GitHub →</a></div></div>
+
+      <div class="project-card fade-up"><div class="project-stripe cpp"></div><div class="project-body"><div class="project-num">08 · C++ · Arduino</div><h3>Electronic Voting Machine — Arduino Uno</h3><p>Functional electronic voting machine on Arduino Uno with push-button voting interface, accurate vote counting for multiple candidates, and hardware result display.</p><div class="project-tags"><span class="ptag">C++</span><span class="ptag">Arduino Uno</span><span class="ptag">Embedded</span></div><a class="project-link" href="https://github.com/agarwalpranay02/Electronic-Voting-Machine-using-Arduino-Uno" target="_blank" rel="noopener">View on GitHub →</a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PATENT -->
+<section id="patent">
+  <div class="section-wrap">
+    <div class="section-eyebrow fade-up">Intellectual Property</div>
+    <div class="section-title fade-up">Patent</div>
+    <div class="patent-card fade-up">
+      <div>
+        <span class="patent-icon">🏛️</span>
+        <h3>IoT Based Device for Real-Time Data Collection and Augmentation for Plant and Agricultural Samples</h3>
+        <p class="patent-meta">Granted by <strong>The Patent Office, Government of India</strong> (Intellectual Property India) under the Designs Act, 2000 and the Designs Rules, 2001.</p>
+        <a class="patent-link" href="https://drive.google.com/file/d/1fnbNIrKeal7NGtuPIZunkuAs7jU-0VHw/view?usp=sharing" target="_blank" rel="noopener">📄 View Patent Certificate</a>
+      </div>
+      <div class="patent-details">
+        <div class="patent-row"><span class="key">Design No.</span><span class="val">476293-001</span></div>
+        <div class="patent-row"><span class="key">Class</span><span class="val">14-02</span></div>
+        <div class="patent-row"><span class="key">Filed</span><span class="val">09 October 2025</span></div>
+        <div class="patent-row"><span class="key">Issued</span><span class="val">06 January 2026</span></div>
+        <div class="patent-row"><span class="key">Inventors</span><span class="val">Pranay Agarwal (1st) · Param Sharma · Vikas Sharma · Aashish Pancholi</span></div>
+        <div class="patent-row"><span class="key">Authority</span><span class="val">Patent Office, Govt. of India</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications" class="section-alt">
+  <div class="section-wrap">
+    <div class="section-eyebrow fade-up">Research Output</div>
+    <div class="section-title fade-up">Publications</div>
+    <div>
+      <div class="pub-item fade-up">
+        <div class="pub-num">01</div>
+        <div>
+          <h3>Soccerlytics: A Deep-Vision Framework for Real-Time Football Analytics using YOLO-Based Multi-Object Tracking, Possession Intelligence & 2D Tactical Reconstruction</h3>
+          <div class="pub-meta">Pranay Agarwal et al. · SCIE Journal · 2025</div>
+          <div class="pub-tags"><span class="pub-tag pt-f">First Author</span><span class="pub-tag pt-f">Corresponding Author</span><span class="pub-tag pt-r">Under Review</span></div>
+          <span class="coming-soon">DOI · Coming Soon</span>
+        </div>
+      </div>
+      <div class="pub-item fade-up">
+        <div class="pub-num">02</div>
+        <div>
+          <h3>A Comprehensive Review and Bibliometric Analysis of Deep Learning Applications in Plant Disease Detection</h3>
+          <div class="pub-meta">et al. · IEEE Access · 2025</div>
+          <div class="pub-tags"><span class="pub-tag pt-s">Second Author</span><span class="pub-tag pt-r">Under Review — IEEE Access</span></div>
+          <span class="coming-soon">DOI · Coming Soon</span>
+        </div>
+      </div>
+      <div class="pub-item fade-up">
+        <div class="pub-num">03</div>
+        <div>
+          <h3>A Hybrid Deep Learning Approach for Automated Plant Disease Diagnosis in Indian Ridge Gourd: Dataset Creation and Real-World Application</h3>
+          <div class="pub-meta">Pranay Agarwal et al. · MIND-2025 · 7th Int'l Conference on ML, Image Processing, Network Security & Data Sciences · MNIT Jaipur</div>
+          <div class="pub-tags"><span class="pub-tag pt-f">First Author</span><span class="pub-tag pt-f">Corresponding Author</span><span class="pub-tag pt-p">Under Publication</span></div>
+          <a class="pub-link" href="https://mind2025.mind-society.org/" target="_blank" rel="noopener">🔗 Conference Website &nbsp;</a>
+          <span class="coming-soon">DOI · Coming Soon</span>
+        </div>
+      </div>
+      <div class="pub-item fade-up">
+        <div class="pub-num">04</div>
+        <div>
+          <h3>TinyML-Based Lightweight Deep Learning Model for Human Activity Recognition on Edge Devices</h3>
+          <div class="pub-meta">et al. · WCAIAA 2026 · 7th World Conference on Artificial Intelligence: Advances & Applications · NFSU Goa</div>
+          <div class="pub-tags"><span class="pub-tag pt-s">Second Author</span><span class="pub-tag pt-s">Presenter</span><span class="pub-tag pt-p">Under Publication</span></div>
+          <a class="pub-link" href="https://scrs.in/conference/wcaiaa2026" target="_blank" rel="noopener">🔗 Conference &nbsp;</a>
+          <a class="pub-link" href="https://drive.google.com/file/d/1ci1EG9D85K83cUhpkDl4lZQx8boihCI-/view?usp=sharing" target="_blank" rel="noopener">📄 Presenter Certificate &nbsp;</a>
+          <span class="coming-soon">DOI · Coming Soon</span>
+        </div>
+      </div>
+      <div class="pub-item fade-up">
+        <div class="pub-num">05</div>
+        <div>
+          <h3>Brinjal Leaves Preprocessed Dataset for Automated Plant Disease Detection Using Deep Learning</h3>
+          <div class="pub-meta">et al. · Data in Brief · Elsevier Inc. · 2025</div>
+          <div class="pub-tags"><span class="pub-tag pt-s">Second Author</span><span class="pub-tag pt-r">Under Review — Elsevier</span></div>
+          <span class="coming-soon">DOI · Coming Soon</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DATASETS -->
+<section id="datasets">
+  <div class="section-wrap">
+    <div class="section-eyebrow fade-up">Open Data</div>
+    <div class="section-title fade-up">Datasets</div>
+    <div class="datasets-grid">
+      <div class="dataset-card fade-up">
+        <div class="dataset-platform">📦 IEEE DataPort</div>
+        <div class="featured-badge">⭐ Featured in IEEE DataPort August 2025 Newsletter</div>
+        <h3>Preprocessed Indian Ridge Gourd Leaf Image Dataset for Healthy and Diseased (Leaf Minor Infestation, Mosaic Virus) Leaf Detection</h3>
+        <p>9,000 preprocessed images across 3 classes with 15 preprocessing techniques applied per image. Collected from real agricultural fields in India.</p>
+        <div class="dstats"><span class="dstat">9,000 Images</span><span class="dstat">3 Classes</span><span class="dstat">224×224px</span><span class="dstat">746+ Views</span><span class="dstat">⭐ 5/5 · 331 Votes</span></div>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:6px;"><strong style="color:var(--ink2);">Authors:</strong> Pranay Agarwal (1st), Param Sharma, Vikas Sharma</p>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:14px;">DOI: 10.21227/469z-vm04</p>
+        <a class="dataset-link" href="https://ieee-dataport.org/documents/preprocessed-indian-ridge-gourd-leaf-image-dataset-healthy-and-diseased-leaf-minor" target="_blank" rel="noopener">View on IEEE DataPort →</a>
+      </div>
+      <div class="dataset-card fade-up">
+        <div class="dataset-platform">📦 Mendeley Data</div>
+        <h3>Brinjal Leaves Preprocessed Dataset for Automated Plant Disease Detection Using Deep Learning</h3>
+        <p>Preprocessed dataset of brinjal leaves for automated plant disease detection. Associated with a Data in Brief paper currently under review at Elsevier Inc.</p>
+        <div class="dstats"><span class="dstat">Brinjal Leaves</span><span class="dstat">Plant Disease</span><span class="dstat">Deep Learning</span></div>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:14px;"><strong style="color:var(--ink2);">Role:</strong> Second Author · Data in Brief paper under review</p>
+        <a class="dataset-link" href="https://data.mendeley.com/datasets/c39p3k87g2/1" target="_blank" rel="noopener">View on Mendeley Data →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENTORS -->
+<section id="mentors" class="section-alt">
+  <div class="section-wrap">
+    <div class="section-eyebrow fade-up">Guidance</div>
+    <div class="section-title fade-up">Research Supervisors & Mentors</div>
+    <div class="mentors-grid">
+      <div class="mentor-card fade-up">
+        <span class="mentor-role-tag mrt-a">Academic Research Supervisor</span>
+        <h3>Dr. Jitendra Goyal</h3>
+        <div class="org">Assistant Professor · Dept. of CSE<br>Birla Institute of Technology (BIT), Mesra, Ranchi<br>PhD (CSE), MNIT Jaipur · 8 Years Teaching Experience</div>
+        <div class="desc">Research areas: Blockchain Technology, IoT Security, Information Security, Cyber Forensics, Computer Networks. IEEE Member & SCRS Society Member. PI of an active seed-money research project at BIT Jaipur.</div>
+        <div class="mentor-links">
+          <a class="mentor-link" href="https://bitmesra.ac.in/Show_profile/673954337A7372473235325A4F374949396A793953673D3D" target="_blank" rel="noopener">🏫 BIT Profile</a>
+          <a class="mentor-link" href="https://orcid.org/0000-0003-3147-8237" target="_blank" rel="noopener">🔬 ORCID</a>
+        </div>
+      </div>
+      <div class="mentor-card fade-up">
+        <span class="mentor-role-tag mrt-i">Industry Internship Mentor</span>
+        <h3>Mr. Vikas Sharma</h3>
+        <div class="org">Founder & Director · MaxBrain Technologies<br>Jaipur, India</div>
+        <div class="desc">IT professional specializing in AI/ML, digital solutions, and agricultural technology. Co-author on IEEE DataPort dataset and co-inventor on the Government of India design patent. Active research collaborator.</div>
+        <div class="mentor-links">
+          <a class="mentor-link" href="https://themaxbrain.com/" target="_blank" rel="noopener">🌐 MaxBrain</a>
+          <a class="mentor-link" href="https://orcid.org/0009-0009-4016-4441" target="_blank" rel="noopener">🔬 ORCID</a>
+          <a class="mentor-link" href="https://scholar.google.com/citations?user=9TgUIFkAAAAJ&hl=en" target="_blank" rel="noopener">📚 Scholar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-wrap">
+    <div class="section-eyebrow fade-up">Credentials</div>
+    <div class="section-title fade-up">Industrial Certifications</div>
+    <div class="certs-grid">
+      <div class="cert-card fade-up"><div class="cert-issuer ci-oracle">Oracle</div><span class="cert-icon">☁️</span><h3>Oracle Cloud Infrastructure 2025 Certified Data Science Professional</h3><div class="cert-links"><a class="cert-link" href="https://catalog-education.oracle.com/ords/certview/sharebadge?id=ABC611AAFEF61B68E0FCF8D6FD7C7B144E8724C12DEBADA42EA189D0885B18D0" target="_blank" rel="noopener">🏅 Badge</a><a class="cert-link" href="https://drive.google.com/file/d/1I3gzjaDHAGUH51MlsrdlQckm_Ou_eZbE/view?usp=sharing" target="_blank" rel="noopener">📄 Certificate</a></div></div>
+
+      <div class="cert-card fade-up"><div class="cert-issuer ci-oracle">Oracle</div><span class="cert-icon">🔍</span><h3>Oracle AI Vector Search Certified Professional</h3><div class="cert-links"><a class="cert-link" href="https://catalog-education.oracle.com/ords/certview/sharebadge?id=D980D33A9706BAB0A5599AFDB46721A4C09D8305F76946E5C8C40AEF6B9B8B97" target="_blank" rel="noopener">🏅 Badge</a><a class="cert-link" href="https://drive.google.com/file/d/1X5FZm8CHj8_Z5AKeP6rvBwW1JxEKPsUC/view?usp=sharing" target="_blank" rel="noopener">📄 Certificate</a></div></div>
+
+      <div class="cert-card fade-up"><div class="cert-issuer ci-oracle">Oracle</div><span class="cert-icon">🤖</span><h3>Oracle Cloud Infrastructure 2025 Certified Generative AI Professional</h3><div class="cert-links"><a class="cert-link" href="https://catalog-education.oracle.com/ords/certview/sharebadge?id=4761F59297BD1B7ABAF2C51BDBBE4ACD91C92FB866EDA09431077AA62C9374B0" target="_blank" rel="noopener">🏅 Badge</a><a class="cert-link" href="https://drive.google.com/file/d/1gERTg-Aj7Htp8aPVmhsJYYr_bzj8BVWt/view?usp=sharing" target="_blank" rel="noopener">📄 Certificate</a></div></div>
+
+      <div class="cert-card fade-up"><div class="cert-issuer ci-oracle">Oracle</div><span class="cert-icon">🧠</span><h3>Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate</h3><div class="cert-links"><a class="cert-link" href="https://catalog-education.oracle.com/ords/certview/sharebadge?id=D855EE5755FA5A54CC5E51096249F84309373E41C15ED6A597C90CC21FDFC1A3" target="_blank" rel="noopener">🏅 Badge</a><a class="cert-link" href="https://drive.google.com/file/d/1si8YVKCsAAjbv3oKFJQHL6W0XvuUJj_Y/view?usp=sharing" target="_blank" rel="noopener">📄 Certificate</a></div></div>
+
+      <div class="cert-card fade-up"><div class="cert-issuer ci-mckinsey">McKinsey & Company</div><span class="cert-icon">📈</span><h3>McKinsey Forward Program</h3><div class="cert-links"><a class="cert-link" href="https://www.credly.com/badges/f877741b-df80-436b-886a-d376993a889e/public_url" target="_blank" rel="noopener">🏅 Credly</a><a class="cert-link" href="https://drive.google.com/file/d/1-Sygg7VSpbc2tJaJAhP7IxmR4nBypeDC/view?usp=sharing" target="_blank" rel="noopener">📄 Certificate</a></div></div>
+
+      <div class="cert-card fade-up"><div class="cert-issuer ci-google">Google</div><span class="cert-icon">📊</span><h3>Google Analytics Individual Qualification</h3><div class="cert-links"><a class="cert-link" href="https://skillshop.credential.net/b8d43d4b-af7a-4436-afc9-5d37a61a0933#acc.CdmSG6bX" target="_blank" rel="noopener">🏅 View Credential</a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements" class="section-alt">
+  <div class="section-wrap">
+    <div class="section-eyebrow fade-up">Recognition</div>
+    <div class="section-title fade-up">Achievements & Recognition</div>
+    <div class="rec-grid">
+      <div class="rec-card fade-up">
+        <span class="rec-icon">🏆</span>
+        <h3>Springer Nature Recognition — India Research Tour 2025</h3>
+        <p>Recognised by Springer Nature (in collaboration with ICSSR & Ministry of Education, Govt. of India) for contributions to the India Research Tour 2025 Contest, advancing the research ecosystem through innovation and excellence. Springer Nature's official LinkedIn account publicly featured the submission.</p>
+        <div class="rec-links">
+          <a class="rec-link" href="https://www.linkedin.com/posts/pranay-agarwal-83b177295_snindiaresearchtour25-snindiaresearchtour25-activity-7380711173517881344-WNgc" target="_blank" rel="noopener">My Post</a>
+          <a class="rec-link" href="https://www.linkedin.com/posts/springernaturetechnologyandpublishingsolutions_snindiaresearchtour25-contest-entries-ugcPost-7391018405333467136-y8Ym" target="_blank" rel="noopener">Springer Post</a>
+          <a class="rec-link" href="https://drive.google.com/file/d/1Vwu0bj0QP-rpLeQlNFHFoR0vxkS4xEKW/view?usp=sharing" target="_blank" rel="noopener">📄 Certificate</a>
+        </div>
+      </div>
+      <div class="rec-card fade-up">
+        <span class="rec-icon">📰</span>
+        <h3>Punjab Kesari Newspaper Feature</h3>
+        <p>Research on AI-based plant disease detection for ridge gourd was featured in Punjab Kesari — a leading regional newspaper. The article covered the patent, IEEE dataset, and Fasal Saathi mobile app, highlighting how BIT Mesra researchers are empowering farmers to detect crop disease via mobile phone.</p>
+        <div class="rec-links">
+          <a class="rec-link" href="https://drive.google.com/file/d/1W3aG9UdBo8dOt2xHAkCgLkpICWl0jWQK/view?usp=sharing" target="_blank" rel="noopener">📄 View Article</a>
+        </div>
+      </div>
+      <div class="rec-card fade-up">
+        <span class="rec-icon">🌟</span>
+        <h3>IEEE DataPort August 2025 Newsletter Feature</h3>
+        <p>The ridge gourd leaf image dataset was specially featured in the official IEEE DataPort August 2025 Newsletter — recognizing its contribution to open agricultural AI research and its utility for the global research community.</p>
+        <div class="rec-links">
+          <a class="rec-link" href="https://mailchi.mp/ieee/august-2025-18252711?e=6622b86501" target="_blank" rel="noopener">🔗 View Newsletter</a>
+          <a class="rec-link" href="https://ieee-dataport.org/documents/preprocessed-indian-ridge-gourd-leaf-image-dataset-healthy-and-diseased-leaf-minor" target="_blank" rel="noopener">📦 IEEE DataPort</a>
+        </div>
+      </div>
+      <div class="rec-card fade-up">
+        <span class="rec-icon">🎤</span>
+        <h3>Conference Presenter — WCAIAA 2026</h3>
+        <p>Presented the research paper "TinyML-Based Lightweight Deep Learning Model for Human Activity Recognition on Edge Devices" at the 7th World Conference on Artificial Intelligence: Advances and Applications (WCAIAA 2026), organized by SCRS at NFSU Goa.</p>
+        <div class="rec-links">
+          <a class="rec-link" href="https://drive.google.com/file/d/1ci1EG9D85K83cUhpkDl4lZQx8boihCI-/view?usp=sharing" target="_blank" rel="noopener">📄 Presenter Certificate</a>
+          <a class="rec-link" href="https://scrs.in/conference/wcaiaa2026" target="_blank" rel="noopener">🔗 Conference</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VOLUNTEER -->
+<section id="volunteer">
+  <div class="section-wrap">
+    <div class="section-eyebrow fade-up">Community</div>
+    <div class="section-title fade-up">Volunteer Work & Community Service</div>
+    <div class="vol-grid">
+      <div class="vol-card fade-up">
+        <div class="vol-period">AUG 2025 — JAN 2026</div>
+        <h3>Volunteer — Prosthetic Rehabilitation Support</h3>
+        <div class="org">Ginor Devi Trust × Bhagwan Mahaveer Viklang Sahayata Samiti (BMVSS)</div>
+        <p>Volunteered in support of prosthetic limb distribution and fitting for individuals with disabilities. Assisted beneficiaries during rehabilitation and medical camps, facilitated coordination between medical staff and patients, and contributed to improving mobility and quality of life for underprivileged patients.</p>
+        <div class="vol-skills"><span class="vol-skill">Empathy</span><span class="vol-skill">Teamwork</span><span class="vol-skill">Communication</span><span class="vol-skill">Community Engagement</span></div>
+        <a class="vol-link" href="https://drive.google.com/file/d/1LEbtWOFPBhGXPJG7-wAzHe1Nalz-DnDV/view?usp=sharing" target="_blank" rel="noopener">📄 Certificate</a>
+      </div>
+      <div class="vol-card fade-up">
+        <div class="vol-period">DEC 2024 — AUG 2025</div>
+        <h3>Volunteer Caretaker — Elderly Care</h3>
+        <div class="org">Community Service · Long-term Engagement</div>
+        <p>Served as a volunteer caretaker assisting elderly residents with daily needs and emotional support over an 8-month engagement. Built strong interpersonal skills, empathy, and a deep sense of social responsibility through sustained community service.</p>
+        <div class="vol-skills"><span class="vol-skill">Interpersonal Skills</span><span class="vol-skill">Empathy</span><span class="vol-skill">Social Responsibility</span><span class="vol-skill">Patience</span></div>
+        <a class="vol-link" href="https://drive.google.com/file/d/1-gxHdnrMRY5tXi_vWPluom5hKiaFr1Bl/view?usp=sharing" target="_blank" rel="noopener">📄 Certificate</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXTRACURRICULAR -->
+<section id="extracurricular" class="section-alt">
+  <div class="section-wrap">
+    <div class="section-eyebrow fade-up">Beyond Academics</div>
+    <div class="section-title fade-up">Extracurricular Activities</div>
+    <div class="extra-grid">
+      <div class="extra-card fade-up">
+        <span class="extra-icon">🏅</span>
+        <h3>Senior Coordinator — Sports Committee</h3>
+        <p>Served as Senior Coordinator for the Sports Committee at BIT Mesra, Sports Fest 2023. Responsible for organizing and managing sports events during the annual fest.</p>
+        <span class="extra-badge">BIT Mesra · Sports Fest 2023</span><br>
+        <a class="extra-link" href="https://drive.google.com/file/d/1ZCh9kCXwLOqVuSbshcX2eapX7AL5xgm3/view?usp=sharing" target="_blank" rel="noopener">📄 Certificate</a>
+      </div>
+      <div class="extra-card fade-up">
+        <span class="extra-icon">⚽</span>
+        <h3>Runner-Up — Football Tournament</h3>
+        <p>Achieved 2nd place in the Football Tournament at BIT Mesra Sports Fest 2023, demonstrating teamwork, athletic ability, and competitive spirit.</p>
+        <span class="extra-badge">🥈 2nd Place · Sports Fest 2023</span><br>
+        <a class="extra-link" href="https://drive.google.com/file/d/1dDhziSlBM7VwLVELsYPoEP9EKChmm59_/view?usp=sharing" target="_blank" rel="noopener">📄 Certificate</a>
+      </div>
+      <div class="extra-card fade-up">
+        <span class="extra-icon">🎭</span>
+        <h3>Coordinator — Cultural Committee</h3>
+        <p>Actively contributed as a Coordinator in the Cultural Committee at BIT Mesra, helping organize and manage cultural events and student activities on campus.</p>
+        <span class="extra-badge">BIT Mesra · Cultural Committee</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-wrap">
+    <div class="section-eyebrow fade-up">Get in Touch</div>
+    <div class="section-title fade-up">Contact Me</div>
+    <div class="contact-layout">
+      <div class="fade-up">
+        <p class="contact-desc">I'm open to research collaborations, internship opportunities, and interesting conversations at the intersection of AI, computer vision, and real-world systems. Feel free to reach out through any of the channels below.</p>
+      </div>
+      <div class="contact-links fade-up">
+        <a class="contact-link" href="mailto:pranayagarwal2511@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <div><span class="c-label">Email</span><span class="c-val">pranayagarwal2511@gmail.com</span></div>
+        </a>
+        <a class="contact-link" href="https://www.linkedin.com/in/pranay-agarwal-83b177295/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          <div><span class="c-label">LinkedIn</span><span class="c-val">pranay-agarwal-83b177295</span></div>
+        </a>
+        <a class="contact-link" href="https://github.com/agarwalpranay02" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          <div><span class="c-label">GitHub</span><span class="c-val">agarwalpranay02</span></div>
+        </a>
+        <a class="contact-link" href="https://scholar.google.com/citations?hl=en&user=L2xx3fgAAAAJ" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg>
+          <div><span class="c-label">Google Scholar</span><span class="c-val">L2xx3fgAAAAJ</span></div>
+        </a>
+        <a class="contact-link" href="https://orcid.org/0009-0009-6879-4074" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zm-1.374 4.622c.446 0 .808.363.808.809s-.362.809-.808.809-.809-.363-.809-.809.363-.809.809-.809zm-.985 2.765h1.97v10.45h-1.97V7.387zm4.01 0h3.303c3.143 0 4.674 2.126 4.674 5.226 0 3.087-1.53 5.224-4.674 5.224h-3.303V7.387zm1.97 1.739v6.971h1.167c1.848 0 2.832-1.152 2.832-3.486 0-2.33-.984-3.485-2.832-3.485H15.62z"/></svg>
+          <div><span class="c-label">ORCID</span><span class="c-val">0009-0009-6879-4074</span></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>© 2025 Pranay Agarwal &nbsp;·&nbsp; B.Tech CSE · BIT Mesra, Ranchi &nbsp;·&nbsp; Jaipur, India</footer>
+
+<script>
+const prog = document.getElementById('progress');
+window.addEventListener('scroll', () => { prog.style.width = (window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100) + '%'; });
+const obs = new IntersectionObserver((entries) => { entries.forEach((e,i) => { if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('visible'), i*80); obs.unobserve(e.target); } }); }, {threshold:0.08});
+document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+const navAs = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  document.querySelectorAll('section[id]').forEach(s => { if(window.scrollY >= s.offsetTop - 150) cur = s.id; });
+  navAs.forEach(a => { a.style.color = a.getAttribute('href')==='#'+cur ? 'var(--accent)' : ''; });
+});
+</script>
+</body>
+</html>
